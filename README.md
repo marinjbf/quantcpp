@@ -1,0 +1,2 @@
+# quantcpp
+Quant analytics library
