@@ -1,8 +1,8 @@
-#include <quantcpp/GeometricLocalVolPDE/GeometricLocaVolPDE.hpp>
+#include <quantcpp/GeometricLocalVolBackwardPDE/GeometricLocalVolBackwardPDE.hpp>
 
 namespace quantcpp {
 
-    Eigen::SparseMatrix<double> GeometricLocalVolatilityPDESolver::TransitionMatrix::implicitMatrix(
+    Eigen::SparseMatrix<double> GeometricLocalVolatilityBackwardPDE::TransitionMatrix::implicitMatrix(
             double T, double dx, double dt, size_t M,
             const MarketDataWrapper::LocalVolatilitySurface& localVolatilitySurface,
             const MarketDataWrapper::DiscountFactorTermStructure& discountFactorTermStructure) {

@@ -6,6 +6,8 @@ set(TESTS
     quantcpp-tests-letsberational tests/LetsBeRational/LetsBeRational.cpp
     quantcpp-tests-blackscholes tests/BlackScholes/BlackScholes.cpp
     quantcpp-tests-ssvi tests/SSVI/SSVI.cpp
+    quantcpp-tests-heston tests/Heston/Heston.cpp
+    quantcpp-tests-nelsonsiegelsvensson tests/NelsonSiegelSvensson/NelsonSiegelSvensson.cpp
     
     quantcpp-geolvpde-implicit-european tests/GeometricLocalVolPDE/ImplicitBackwardPricer/EuroVanilla.cpp
 )

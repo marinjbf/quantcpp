@@ -1,9 +1,9 @@
-#include <quantcpp/GeometricLocalVolPDE/GeometricLocaVolPDE.hpp>
+#include <quantcpp/GeometricLocalVolBackwardPDE/GeometricLocalVolBackwardPDE.hpp>
 #include <numcpp/ThomasAlgorithm.hpp>
 
 namespace quantcpp {
     
-    Eigen::MatrixXd GeometricLocalVolatilityPDESolver::ImplicitBackwardPricer::europeanVanillaPriceMatrix(double S, double K, double T, bool isCall, size_t N, size_t M) const {
+    Eigen::MatrixXd GeometricLocalVolatilityBackwardPDE::ImplicitPricer::europeanVanillaPriceMatrix(double S, double K, double T, bool isCall, size_t N, size_t M) const {
 
         double dt = T/double(N);
         double atmLocalVol = localVolatilitySurface(0.0,T);
