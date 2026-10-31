@@ -1,4 +1,4 @@
-#include <quantcpp/GeometricLocalVolPDE/GeometricLocaVolPDE.hpp>
+#include <quantcpp/GeometricLocalVolBackwardPDE/GeometricLocalVolBackwardPDE.hpp>
 #include <quantcpp/SSVI/SSVI.hpp>
 #include <quantcpp/BlackScholes/BlackSholes.hpp>
 #include <iostream>
@@ -23,7 +23,7 @@ void europeanFlatSigma() {
     MarketDataWrapper::DiscountFactorTermStructure discountTermStructure = [r](double t) {return std::exp(-r*t);};
     MarketDataWrapper::LocalVolatilitySurface localVolatilitySurface = [sigma](double k, double t) {return sigma;};
     MarketDataWrapper::ForwardTermStructure forwardTermStructure = [mu,S](double t) {return S*std::exp(mu*t);};
-    GeometricLocalVolatilityPDESolver::ImplicitBackwardPricer implicitPricer(forwardTermStructure,discountTermStructure,localVolatilitySurface);
+    GeometricLocalVolatilityBackwardPDE::ImplicitPricer implicitPricer(forwardTermStructure,discountTermStructure,localVolatilitySurface);
     
     auto t1 = std::chrono::high_resolution_clock::now();
 
@@ -57,7 +57,7 @@ void europeanLocalVolatility() {
     MarketDataWrapper::DiscountFactorTermStructure discountTermStructure = [r](double t) {return std::exp(-r*t);};
     MarketDataWrapper::LocalVolatilitySurface localVolatilitySurface = [ssvi](double k, double t) {return std::sqrt(ssvi.localVariance(k, t));};
     MarketDataWrapper::ForwardTermStructure forwardTermStructure = [S,mu](double t) {return S*std::exp(mu*t);};
-    GeometricLocalVolatilityPDESolver::ImplicitBackwardPricer implicitPricer(forwardTermStructure,discountTermStructure,localVolatilitySurface);
+    GeometricLocalVolatilityBackwardPDE::ImplicitPricer implicitPricer(forwardTermStructure,discountTermStructure,localVolatilitySurface);
 
     auto t1 = std::chrono::high_resolution_clock::now();
 

@@ -8,8 +8,9 @@ set(TESTS
     quantcpp-tests-ssvi tests/SSVI/SSVI.cpp
     quantcpp-tests-heston tests/Heston/Heston.cpp
     quantcpp-tests-nelsonsiegelsvensson tests/NelsonSiegelSvensson/NelsonSiegelSvensson.cpp
+    quantcpp-tests-baroneadesiwhaley tests/BaroneAdesiWhaley/BaroneAdesiWhaley.cpp
     
-    quantcpp-geolvpde-implicit-european tests/GeometricLocalVolPDE/ImplicitBackwardPricer/EuroVanilla.cpp
+    quantcpp-geolvpde-implicit-european tests/GeometricLocalVolBackwardPDE/ImplicitPricer/EuroVanilla.cpp
 )
 
 while(TESTS)
