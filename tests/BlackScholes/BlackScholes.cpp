@@ -20,8 +20,8 @@ void initialTestBlackScholes() {
     double F = S*std::exp((r-q)*T);
     double x = std::log(F/K); 
     double normalizedSigma = sigma*sqrt(T);
-    double modelCallPrice = BlackScholes::europeanPrice(F,K,T,sigma, true)*std::exp(-r*T)*std::sqrt(F*K);
-    double modelPutPrice = BlackScholes::europeanPrice(F,K,T,sigma, false)*std::exp(-r*T)*std::sqrt(F*K);
+    double modelCallPrice = BlackScholes::europeanPrice(F,K,T,sigma, true)*std::exp(-r*T);
+    double modelPutPrice = BlackScholes::europeanPrice(F,K,T,sigma, false)*std::exp(-r*T);
     double impliedVolPut = BlackScholes::impliedVolatility(modelPutPrice*std::exp(r*T)/std::sqrt(F*K),F,K,T,false);
     double impliedVolCall = BlackScholes::impliedVolatility(modelCallPrice*std::exp(r*T)/std::sqrt(F*K),F, K, T, true);
     assert(isClose(modelCallPrice, callPrice, 1e-4));

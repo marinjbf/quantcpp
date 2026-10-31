@@ -7,7 +7,7 @@ namespace quantcpp {
 
         static inline double europeanPrice(double F, double K, double t, double sigma, bool isCall) {
 
-            return LetsBeRational::_getNormalizedPrice(std::log(F/K), sigma * std::sqrt(t), isCall);
+            return LetsBeRational::_getNormalizedPrice(std::log(F/K), sigma * std::sqrt(t), isCall)*std::sqrt(F*K);
         }
 
         static inline double impliedVolatility(double normalizedPrice, double F, double K, double t, bool isCall) {

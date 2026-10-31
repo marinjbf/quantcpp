@@ -59,3 +59,8 @@ Finally we have:
 $$
 F_t(T) = \mathbb{E}^\mathbb{Q}_t\left[S_T\right] = S_t\exp \left[ \int_t^T \mu_s ds\right] \text{ where } \mu_t = \frac{\partial \ln F_t(T)}{\partial T}\mid_{T=t}
 $$
+
+## References 
+
+- The pricing of options and corporate liabilities, Black and Scholes (1973) : https://www.jstor.org/stable/1831029
+- The pricing of commodity contract, Black (1976) : https://www.sciencedirect.com/science/article/abs/pii/0304405X76900246

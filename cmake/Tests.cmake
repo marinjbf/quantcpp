@@ -5,6 +5,9 @@ set(TESTS
     quantcpp-tests-bachelier tests/Bachelier/Bachelier.cpp
     quantcpp-tests-letsberational tests/LetsBeRational/LetsBeRational.cpp
     quantcpp-tests-blackscholes tests/BlackScholes/BlackScholes.cpp
+    quantcpp-tests-ssvi tests/SSVI/SSVI.cpp
+    
+    quantcpp-geolvpde-implicit-european tests/GeometricLocalVolPDE/ImplicitBackwardPricer/EuroVanilla.cpp
 )
 
 while(TESTS)
