@@ -31,7 +31,6 @@ namespace quantcpp {
             t -= dt; 
             t = std::max(dt/5.0, t);
             Eigen::SparseMatrix<double> implicitMatrix = TransitionMatrix::implicitMatrix(t, dx, dt, M, localVolatilitySurface, discountFactorTermStructure);
-            
             optionValueMatrix.col(i-1) = numcpp::solveThomasAlgorithm(implicitMatrix, optionValueMatrix.col(i));
             optionValueMatrix.col(i-1)(2) = std::max(optionValueMatrix.col(i-1)(2),0.0); 
             optionValueMatrix.col(i-1)(1) = std::max(optionValueMatrix.col(i-1)(2),0.0); 

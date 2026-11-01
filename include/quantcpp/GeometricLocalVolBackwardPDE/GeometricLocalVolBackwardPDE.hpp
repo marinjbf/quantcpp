@@ -43,5 +43,23 @@ namespace quantcpp {
             //double americanVanillaPrice(double S, double K, double T, bool isCall, size_t N, size_t M) const; 
             //double bermudanVanillaPrice(double S, double K, double T, bool isCall, const std::set<double>& callDates, size_t N, size_t M) const; 
         };
+
+        struct ExplicitPricer {
+
+            MarketDataWrapper::ForwardTermStructure forwardTermStructure;
+            MarketDataWrapper::DiscountFactorTermStructure discountFactorTermStructure; 
+            MarketDataWrapper::LocalVolatilitySurface localVolatilitySurface;
+            static constexpr double NUMBER_SIGMA_DEVIATION = 5.0;
+
+            ExplicitPricer(
+                const MarketDataWrapper::ForwardTermStructure& forwardTermStructure_, 
+                const MarketDataWrapper::DiscountFactorTermStructure& discountFactorTermStructure_, 
+                const MarketDataWrapper::LocalVolatilitySurface& localVolatilitySurface_
+            );
+
+            Eigen::MatrixXd europeanVanillaPriceMatrix(double S, double K, double T, bool isCall, size_t N, size_t M) const; 
+            //double americanVanillaPrice(double S, double K, double T, bool isCall, size_t N, size_t M) const; 
+            //double bermudanVanillaPrice(double S, double K, double T, bool isCall, const std::set<double>& callDates, size_t N, size_t M) const; 
+        };
     };
 }
