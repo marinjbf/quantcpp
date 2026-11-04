@@ -22,11 +22,11 @@ void europeanFlatSigma() {
     MarketDataWrapper::DiscountFactorTermStructure discountTermStructure = [r](double t) {return std::exp(-r*t);};
     MarketDataWrapper::LocalVolatilitySurface localVolatilitySurface = [sigma](double k, double t) {return sigma;};
     MarketDataWrapper::ForwardTermStructure forwardTermStructure = [mu,S](double t) {return S*std::exp(mu*t);};
-    GeometricLocalVolatilityBackwardPDE::ImplicitPricer implicitPricer(forwardTermStructure,discountTermStructure,localVolatilitySurface);
+    GeometricLocalVolatilityBackwardPDE::ExplicitPricer explicitPricer(forwardTermStructure,discountTermStructure,localVolatilitySurface);
     
     auto t1 = std::chrono::high_resolution_clock::now();
 
-    Eigen::MatrixXd pdePrice = implicitPricer.europeanVanillaPriceMatrix(S, K, T, isCall,N, M);
+    Eigen::MatrixXd pdePrice = explicitPricer.europeanVanillaPriceMatrix(S, K, T, isCall,N, M);
 
     auto t2 = std::chrono::high_resolution_clock::now();
     auto ms_int = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1);

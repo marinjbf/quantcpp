@@ -1,9 +1,12 @@
 add_library(quantcpp 
     STATIC 
         src/LetsBeRational/LetsBeRational.cpp
+        
         src/GeometricLocalVolBackwardPDE/PricerConstructors.cpp
         src/GeometricLocalVolBackwardPDE/TransitionMatrix/ImplicitMatrix.cpp
+        src/GeometricLocalVolBackwardPDE/TransitionMatrix/ExplicitMatrix.cpp
         src/GeometricLocalVolBackwardPDE/ImplicitPricer/EuroVanilla.cpp
+        src/GeometricLocalVolBackwardPDE/ExplicitPricer/EuroVanilla.cpp
 )
 
 target_link_libraries(quantcpp

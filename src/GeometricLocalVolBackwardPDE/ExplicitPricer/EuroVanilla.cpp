@@ -27,13 +27,14 @@ namespace quantcpp {
         }; 
 
         for (size_t i = N; i>0; i--) {
-            t -= dt; 
-            t = std::max(dt/5.0, t);
+            //t -= dt; 
+            //t = std::max(dt/5.0, t);
             Eigen::SparseMatrix<double> explicitMatrix = TransitionMatrix::explicitMatrix(t, dx, dt, M, localVolatilitySurface, discountFactorTermStructure);
             optionValueMatrix.col(i-1) = explicitMatrix*optionValueMatrix.col(i);
             optionValueMatrix.col(i-1)(2) = std::max(optionValueMatrix.col(i-1)(2),0.0); 
             optionValueMatrix.col(i-1)(1) = std::max(optionValueMatrix.col(i-1)(2),0.0); 
             optionValueMatrix.col(i-1)(0) = std::max(2*optionValueMatrix.col(i-1)(1) - optionValueMatrix.col(i-1)(2),0.0); 
+            t -= dt;
 
         }
         return optionValueMatrix;

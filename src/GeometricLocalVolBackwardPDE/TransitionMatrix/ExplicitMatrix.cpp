@@ -9,13 +9,13 @@ namespace quantcpp {
 
         Eigen::SparseMatrix<double> A(2*M+1, 2*M+1);
         std::vector<Eigen::Triplet<double>> coefs;
+        //double adjustedT = std::max(dt/5.0,T);
         double sigma = MarketDataWrapper::localVolatility(0.0,T, localVolatilitySurface);
-        double rfr = MarketDataWrapper::forwardDiscountFactor(T, T+dt,discountFactorTermStructure);
-
-        double p = .5*sigma*sigma*dt/(dx*dx);
+        double rfr = MarketDataWrapper::forwardDiscountFactor(T-dt, T,discountFactorTermStructure);
+        double p = sigma*sigma*dt/(dx*dx);
         double mid = (1-p)/rfr;
-        double up = (.5*p + .25*(0.0 - .5*sigma*sigma)*dt/dx)/rfr; 
-        double down = (.5*p - .25*(0.0 - .5*sigma*sigma)*dt/dx)/rfr; 
+        double up = .5*p - .25*sigma*sigma*dt/dx/rfr; 
+        double down = .5*p + .25*sigma*sigma*dt/dx/rfr; 
 
         coefs.push_back({Eigen::Triplet<double>(M,M-1,up)});
         coefs.push_back({Eigen::Triplet<double>(M,M,mid)});
@@ -25,10 +25,10 @@ namespace quantcpp {
         for (size_t i = 1; i<=M; i++) {
 
             sigma = MarketDataWrapper::localVolatility(-double(i)*dx,T, localVolatilitySurface);
-            p = .5*sigma*sigma*dt/(dx*dx);
+            p = sigma*sigma*dt/(dx*dx);
             mid = (1-p)/rfr;
-            up = (.5*p + .25*(0.0 - .5*sigma*sigma)*dt/dx)/rfr; 
-            down = (.5*p - .25*(0.0 - .5*sigma*sigma)*dt/dx)/rfr; 
+            up = .5*p - .25*sigma*sigma*dt/dx/rfr; 
+            down = .5*p + .25*sigma*sigma*dt/dx/rfr; 
             
             if (M-i == 0) {
 
@@ -44,9 +44,10 @@ namespace quantcpp {
                 coefs.push_back({Eigen::Triplet<double>(M-i,M-i,mid)});
                 coefs.push_back({Eigen::Triplet<double>(M-i,M-i+1,down)});
                 sigma = MarketDataWrapper::localVolatility(double(i)*dx,T, localVolatilitySurface);
-                mid = rfr + sigma*sigma*dt/(dx*dx); 
-                up = -.5*sigma*sigma*dt/(dx*dx) - .5*(0.0 - .5*sigma*sigma)*dt/dx; 
-                down = -.5*sigma*sigma*dt/(dx*dx) + .5*(0.0 - .5*sigma*sigma)*dt/dx;
+                p = sigma*sigma*dt/(dx*dx);
+                mid = (1-p)/rfr;
+                up = .5*p - .25*sigma*sigma*dt/dx/rfr; 
+                down = .5*p + .25*sigma*sigma*dt/dx/rfr; 
                 coefs.push_back({Eigen::Triplet<double>(M+i,M+i-1,up)});
                 coefs.push_back({Eigen::Triplet<double>(M+i,M+i,mid)});
                 coefs.push_back({Eigen::Triplet<double>(M+i,M+i+1,down)}); 
