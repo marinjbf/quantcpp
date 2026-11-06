@@ -5,6 +5,18 @@ namespace quantcpp {
 
     struct GeometricLocalVolatilityForwardPDE {
 
+        struct EuropeanPricerResult {
+
+            Eigen::MatrixXd priceMatrix; 
+            Eigen::VectorXd timeVector;
+            Eigen::VectorXd forwardPriceVector;
+            Eigen::VectorXd logMoneynessVector;
+
+            double isCall;
+
+            double price(double K, double T, bool isCall) const;
+        };
+
         struct ExplicitForwardPricer {
 
             MarketDataWrapper::ForwardTermStructure forwardTermStructure;
@@ -18,7 +30,7 @@ namespace quantcpp {
                 const MarketDataWrapper::LocalVolatilitySurface& localVolatilitySurface_
             );
 
-            std::pair<Eigen::MatrixXd,Eigen::MatrixXd> europeanVanillaMatrixes(double S, double T, size_t N, size_t M) const; 
+            EuropeanPricerResult europeanVanillaMatrixes(double S, double T, bool isCall, size_t N, size_t M) const; 
             //double americanVanillaPrice(double S, double K, double T, bool isCall, size_t N, size_t M) const; 
             //double bermudanVanillaPrice(double S, double K, double T, bool isCall, const std::set<double>& callDates, size_t N, size_t M) const; 
         };
